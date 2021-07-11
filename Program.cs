@@ -94,11 +94,11 @@ namespace ConsoleApp1
 
             for(int i = 0; i < newlines.Length; i++)
             {
-                if (i + 39 >= newlines.Length)
+                if (i + 41 >= newlines.Length)
                 {
                     break;
                 }
-                newlines[i] = newlines[i + 39];
+                newlines[i] = newlines[i + 41];
             }
             foreach (var x in newlines)
             {
