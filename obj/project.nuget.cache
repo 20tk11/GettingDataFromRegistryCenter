@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "5NlDb0tPwuqbo7czl92HmXEE+ixlB1BNYsnvLcVkPgieUROw9g8aL6+XfK2iRwrXkmHFOOMMWFuHU/QSymnm1Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\tkana\\source\\repos\\ConsoleApp1\\ConsoleApp1.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\tkana\\.nuget\\packages\\htmlagilitypack\\1.11.34\\htmlagilitypack.1.11.34.nupkg.sha512"
+  ],
+  "logs": []
+}
