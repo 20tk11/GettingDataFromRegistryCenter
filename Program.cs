@@ -94,11 +94,11 @@ namespace ConsoleApp1
 
             for(int i = 0; i < newlines.Length; i++)
             {
-                if (i + 41 >= newlines.Length)
+                if (i + 221 >= newlines.Length)
                 {
                     break;
                 }
-                newlines[i] = newlines[i + 41];
+                newlines[i] = newlines[i + 221];
             }
             foreach (var x in newlines)
             {
@@ -113,6 +113,7 @@ namespace ConsoleApp1
             int countofgeturl = 0;
             string heading = "";
             int pagecounts = 0;
+            HtmlAgilityPack.HtmlDocument document;
             Excel excel = new Excel(@"D:\Book1.xlsx", 1);
             for (int i = 0; i < newlines.Length; i++)
             {
@@ -124,9 +125,15 @@ namespace ConsoleApp1
                     }
                     string link = "https://www.registrucentras.lt/jar/p/dok.php?kod=" + newlines[i] + "&pav=%2A&p=" + temps.ToString();
                     countofgeturl++;
-                    HtmlAgilityPack.HtmlDocument document = website.Load(link);
+                    website.PreRequest = delegate (System.Net.HttpWebRequest webRequest)
+                    {
+                        webRequest.Timeout = 100000;
+                        return true;
+                    };
+                    document = website.Load(link);
+                    Console.WriteLine(link);
                     var list = document.DocumentNode.SelectNodes("//table[@cellspacing='1']//tr//td");
-                    var meh = document.DocumentNode.SelectNodes("//table[@cellspacing='0']//tr//td//b");
+                    var meh = document.DocumentNode.SelectNodes("//table[@cellspacing='0']//tr//td[@width='20%']//b");
                     int count = 0;
                     string pagecount = "";
 
@@ -139,7 +146,8 @@ namespace ConsoleApp1
 
                     foreach (var content in meh)
                     {
-                        if (counts == 2)
+                        Console.WriteLine(content.InnerText.ToString());
+                        if (counts == 0)
                         {
                             pagecount = content.InnerText.ToString();
                             pagecounts = System.Convert.ToInt32(pagecount);
