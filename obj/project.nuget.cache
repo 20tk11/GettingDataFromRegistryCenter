@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5NlDb0tPwuqbo7czl92HmXEE+ixlB1BNYsnvLcVkPgieUROw9g8aL6+XfK2iRwrXkmHFOOMMWFuHU/QSymnm1Q==",
+  "dgSpecHash": "Cw5XSRKqK0Liqp6NGwZ/7kbzZ3673hAE9SmegVOyWJn5H1wAlJVxw+813zJjHa/GjkIBVdyesZz4gXW+aUZRmg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\tkana\\source\\repos\\ConsoleApp1\\ConsoleApp1.csproj",
+  "projectFilePath": "D:\\Projektai\\Getting\\ConsoleApp1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tkana\\.nuget\\packages\\htmlagilitypack\\1.11.34\\htmlagilitypack.1.11.34.nupkg.sha512"
   ],

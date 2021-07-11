@@ -83,96 +83,6 @@ namespace ConsoleApp1
     }
     class Program
     {
-        static void Start()
-        {
-            Excel excel = new Excel(@"D:\Book1.xlsx", 1);
-            //excel.WriteToCell(1, 1, "peter");
-            for (int i = 0; i < 10; i++)
-            {
-                for (int j = 0; j < 10; j++)
-                {
-                    int text = i + j;
-                    excel.WriteToCell(i, j, text.ToString());
-                }
-            }
-            excel.Save();
-            excel.SaveAs(@"D:\Book2.xlsx");
-            excel.Close();
-
-            /*string textFile = @"D:\new3.txt";
-            string text = File.ReadAllText(textFile);
-            Console.WriteLine(text);*/
-            HtmlAgilityPack.HtmlWeb website = new HtmlAgilityPack.HtmlWeb();
-            HtmlAgilityPack.HtmlDocument document = website.Load("https://www.registrucentras.lt/jar/p/dok.php?kod=162947683&pav=%2A&p=1");
-            var list = document.DocumentNode.SelectNodes("//table[@cellspacing='1']//tr//td");
-            var meh = document.DocumentNode.SelectNodes("//table[@cellspacing='0']//tr//td//b");
-            int count = 0;
-            int counts = 0;
-            int temp = 0;
-            string pagecount = "";
-            int pagecounts = 0;
-            string heading = "";
-            string data1 = "";
-            string data2 = "";
-            string data3 = "";
-            string data4 = "";
-            string data5 = "";
-            List<Data> newlist = new List<Data>();
-            foreach (var content in meh)
-            {
-                if (counts == 2)
-                {
-                    pagecount = content.InnerText.ToString();
-                    pagecounts = System.Convert.ToInt32(pagecount);
-                }
-                counts++;
-            }
-            Console.WriteLine(pagecounts);
-            foreach (var content in list)
-            {
-
-                if (count < 1)
-                {
-                    heading += content.InnerText.ToString();
-                }
-                if (count == 6)
-                {
-                    newlist.Add(new Data(data1, data2, data3, data4, data5));
-                    temp++;
-                    count = 1;
-                }
-                if (count == 1)
-                {
-                    data1 = content.InnerText.ToString();
-                }
-                if (count == 2)
-                {
-                    data2 = content.InnerText.ToString();
-                }
-                if (count == 3)
-                {
-                    data3 = content.InnerText.ToString();
-                }
-                if (count == 4)
-                {
-                    data4 = content.InnerText.ToString();
-                }
-                if (count == 5)
-                {
-                    data5 = content.InnerText.ToString();
-                }
-                Console.WriteLine(content.InnerText);
-                Console.WriteLine(count);
-                count++;
-            }
-            newlist.Add(new Data(data1, data2, data3, data4, data5));
-            //Console.Read();
-            Console.WriteLine(heading);
-            foreach (var x in newlist)
-            {
-                Console.WriteLine(x.ToString());
-            }
-        }
         static void Main(string[] args)
         {
             string[] alllines = File.ReadAllLines(@"D:\Data.txt");
@@ -193,7 +103,7 @@ namespace ConsoleApp1
             {
                 Console.WriteLine(x);
             }
-            /*HtmlAgilityPack.HtmlWeb website = new HtmlAgilityPack.HtmlWeb();
+            HtmlAgilityPack.HtmlWeb website = new HtmlAgilityPack.HtmlWeb();
             List<Data> newlist = new List<Data>();
             int page_count = 1;
             int temp = 0;
@@ -307,7 +217,7 @@ namespace ConsoleApp1
             }
             excel.Save();
             excel.Close();
-            //Start();*/
+            //Start();
         }
     }
 }
