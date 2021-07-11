@@ -83,9 +83,10 @@ namespace ConsoleApp1
     }
     class Program
     {
+
         static void Main(string[] args)
         {
-            string[] alllines = File.ReadAllLines(@"C:\Projektai\Getting\Data.txt");
+            string[] alllines = File.ReadAllLines(@"D:\Data.txt");
             Array.Sort(alllines);
             var newlines = alllines.Distinct().ToArray();
             Console.WriteLine(alllines.Length);
@@ -112,7 +113,7 @@ namespace ConsoleApp1
             int countofgeturl = 0;
             string heading = "";
             int pagecounts = 0;
-            Excel excel = new Excel(@"C:\Book1.xlsx", 1);
+            Excel excel = new Excel(@"D:\Book1.xlsx", 1);
             for (int i = 0; i < newlines.Length; i++)
             {
                 while (page_count >= temps)
