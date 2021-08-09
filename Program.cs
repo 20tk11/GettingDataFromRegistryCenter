@@ -81,29 +81,70 @@ namespace ConsoleApp1
             ws.Cells[i + 1, j + 1].Value2 = text;
         }
     }
-    class Program
+    class Job
     {
-
-        static void Main(string[] args)
+        public void Createtxt()
         {
-            string[] alllines = File.ReadAllLines(@"D:\Data.txt");
-            Array.Sort(alllines);
-            var newlines = alllines.Distinct().ToArray();
-            Console.WriteLine(alllines.Length);
-            Console.WriteLine(newlines.Length);
-
-            for(int i = 0; i < newlines.Length; i++)
+            string[] alllines = File.ReadAllLines(@"D:\Projektai\Getting\Data1.txt");
+            List<string> mylist = new List<string>();
+            for (int i = 0; i < alllines.Length; i++)
             {
-                if (i + 221 >= newlines.Length)
+                if (!mylist.Contains(alllines[i]))
                 {
-                    break;
+                    mylist.Add(alllines[i]);
                 }
-                newlines[i] = newlines[i + 221];
             }
-            foreach (var x in newlines)
+            using (StreamWriter outputFile = new StreamWriter(@"D:\Projektai\Getting\WriteLines.txt"))
             {
-                Console.WriteLine(x);
+                foreach (string line in mylist)
+                    outputFile.WriteLine(line);
             }
+        }
+        public void Filter()
+        {
+            string[] alllines = File.ReadAllLines(@"D:\Projektai\Getting\Data1.txt");
+            string[] allliness = File.ReadAllLines(@"D:\Projektai\Getting\WriteLines.txt");
+            List<int> mylist = new List<int>();
+            for (int i = 0; i < allliness.Length; i++)
+            {
+                int count = 0;
+                while(allliness[i] != alllines[count] && alllines.Length > count + 1 )
+                {
+                    //Console.WriteLine(count);
+                    count++;
+                }
+                int place = count + 1;
+                Console.WriteLine(i);
+                Console.WriteLine(place);
+                
+                mylist.Add(place);
+            }
+            using (StreamWriter outputFile = new StreamWriter(@"D:\Projektai\Getting\WriteLines2.txt"))
+            {
+                foreach (int line in mylist)
+                    outputFile.WriteLine(line);
+            }
+        }
+        public void AssignCodes()
+        {
+            string[] alllines = File.ReadAllLines(@"D:\Projektai\Getting\Codes.txt");
+            string[] allliness = File.ReadAllLines(@"D:\Projektai\Getting\WriteLines2.txt");
+            using (StreamWriter outputFile = new StreamWriter(@"D:\Projektai\Getting\rezdata.txt"))
+            {
+                for (int i = 0; i < allliness.Length; i++)
+                {
+                    int tt = Int32.Parse(allliness[i]);
+                    if (tt < alllines.Length)
+                    {
+                        Console.WriteLine(tt - 1);
+                        outputFile.WriteLine(alllines[tt - 1]);
+                    }
+                }
+            }
+        }
+        public void Do()
+        {
+            string[] alllines = File.ReadAllLines(@"D:\Projektai\Getting\rezdata.txt");
             HtmlAgilityPack.HtmlWeb website = new HtmlAgilityPack.HtmlWeb();
             List<Data> newlist = new List<Data>();
             int page_count = 1;
@@ -115,15 +156,15 @@ namespace ConsoleApp1
             int pagecounts = 0;
             HtmlAgilityPack.HtmlDocument document;
             Excel excel = new Excel(@"D:\Book1.xlsx", 1);
-            for (int i = 0; i < newlines.Length; i++)
+            for (int i = 0; i < alllines.Length; i++)
             {
                 while (page_count >= temps)
                 {
-                    if (countofgeturl == 80)
+                    if (countofgeturl == 140)
                     {
                         break;
                     }
-                    string link = "https://www.registrucentras.lt/jar/p/dok.php?kod=" + newlines[i] + "&pav=%2A&p=" + temps.ToString();
+                    string link = "https://www.registrucentras.lt/jar/p/dok.php?kod=" + alllines[i] + "&pav=%2A&p=" + temps.ToString();
                     countofgeturl++;
                     website.PreRequest = delegate (System.Net.HttpWebRequest webRequest)
                     {
@@ -155,7 +196,7 @@ namespace ConsoleApp1
                         counts++;
                     }
                     if (pagecounts % 25 == 0)
-                    { 
+                    {
                         page_count = (pagecounts / 25);
                     }
                     else
@@ -214,7 +255,7 @@ namespace ConsoleApp1
                     excellength++;
                 }
                 int sss = 0;
-                foreach(var x in newlist)
+                foreach (var x in newlist)
                 {
                     sss++;
                 }
@@ -227,6 +268,16 @@ namespace ConsoleApp1
             excel.Save();
             excel.Close();
             //Start();
+        }
+    }
+
+    class Program
+    {
+        
+        static void Main(string[] args)
+        {
+            Job job = new Job();
+            job.Do();
         }
     }
 }
